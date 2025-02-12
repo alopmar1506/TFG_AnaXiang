@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class usuarioController extends Controller
+class mascotaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index()
     {
-        return view('handspaws');
+        //
     }
 
     /**
@@ -19,7 +19,7 @@ class usuarioController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class usuarioController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
@@ -35,7 +35,7 @@ class usuarioController extends Controller
      */
     public function show(string $id)
     {
-
+        //
     }
 
     /**
@@ -43,13 +43,15 @@ class usuarioController extends Controller
      */
     public function edit(string $id)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id){
+    public function update(Request $request, string $id)
+    {
+        //
     }
 
     /**
@@ -57,5 +59,6 @@ class usuarioController extends Controller
      */
     public function destroy(string $id)
     {
+        //
     }
 }
