@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/handspaws', [usuarioController::class,'index'])->name('handspaws');
+Route::get('/handspaws/{id}', [usuarioController::class, 'show'])->name('mostrarUsuarios');
+

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('contrasena');
-            $table->string('raza mascota');
+            $table->string('raza_mascota');
             $table->string('ubicacion');
 
         });

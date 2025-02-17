@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Usuario;
+
 
 class usuarioController extends Controller
 {
@@ -11,7 +13,14 @@ class usuarioController extends Controller
      */
     public function index(Request $request)
     {
-        return view('handspaws');
+        $query=Usuario::query();
+        $usuarios=Usuario::all();
+        $ubicacionFIltrada=$request->ubicacion;
+        if($request->has('ubicacion')){ //COMPRUEBA QUE SE HAY UN CAMPO "NOMBRE"
+            $query->where('ubicacion','like','%'.$request->ubicacion.'%');
+        };
+        $coches= $query->get();
+        return view('handspaws',compact('usuarios'));
     }
 
     /**
@@ -35,7 +44,8 @@ class usuarioController extends Controller
      */
     public function show(string $id)
     {
-
+        $coche=Usuario::findOrFail($id);
+        return view('mostrarUsuarios',compact('usuarios'));
     }
 
     /**

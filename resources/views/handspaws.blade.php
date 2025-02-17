@@ -98,6 +98,12 @@
             display: flex;
         }
 
+        .usuarios{
+            border: 1px solid grey;
+            border-radius: 2px;
+            display: flex;
+            flex-direction: column;
+        }
     </style>
 </head>
 
@@ -114,13 +120,26 @@
 
 <div class="fotoPrincipal">
 </div>
-
 <main>
+    <form action="{{ route('handspaws') }}" method="GET">
+        <input type="text" name="ubicacion" placeholder="Buscar por ubicación">
+        <input type="submit" value="Filtrar">
+    </form>
 
+    @foreach($usuarios as $usuario)
+        <div class="usuarios">
+            <ul>
+                <li><a href="{{ route('mostrarUsuarios', $usuario->id) }}">{{$usuario->nombre}}</a></li>
+                <li>Especie de la mascota: {{$usuario->raza_mascota}}</li>
+                <li>Ubicación: {{$usuario->ubicacion}}</li>
+            </ul>
+        </div>
+    @endforeach
 </main>
+
+
 <footer class="pie">
     <div class="autora">
-        <a href="index.html"></a>
         <p>2023-2024 | Ana Xiang López Martínez</p>
     </div>
     <div class="footerDerecha">
