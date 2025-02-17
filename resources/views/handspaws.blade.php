@@ -99,8 +99,6 @@
         }
 
         .usuarios{
-            border: 1px solid grey;
-            border-radius: 2px;
             display: flex;
             flex-direction: column;
         }
@@ -125,18 +123,16 @@
         <input type="text" name="ubicacion" placeholder="Buscar por ubicación">
         <input type="submit" value="Filtrar">
     </form>
-
-    @foreach($usuarios as $usuario)
-        <div class="usuarios">
+    <div class="usuarios">
+        @foreach($usuarios as $usuario)
             <ul>
                 <li><a href="{{ route('mostrarUsuarios', $usuario->id) }}">{{$usuario->nombre}}</a></li>
                 <li>Especie de la mascota: {{$usuario->raza_mascota}}</li>
                 <li>Ubicación: {{$usuario->ubicacion}}</li>
             </ul>
-        </div>
-    @endforeach
+        @endforeach
+    </div>
 </main>
-
 
 <footer class="pie">
     <div class="autora">

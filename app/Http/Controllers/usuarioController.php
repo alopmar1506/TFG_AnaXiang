@@ -19,7 +19,7 @@ class usuarioController extends Controller
         if($request->has('ubicacion')){ //COMPRUEBA QUE SE HAY UN CAMPO "NOMBRE"
             $query->where('ubicacion','like','%'.$request->ubicacion.'%');
         };
-        $coches= $query->get();
+        $usuarios= $query->get();
         return view('handspaws',compact('usuarios'));
     }
 
@@ -44,7 +44,7 @@ class usuarioController extends Controller
      */
     public function show(string $id)
     {
-        $coche=Usuario::findOrFail($id);
+        $usuarios=Usuario::findOrFail($id);
         return view('mostrarUsuarios',compact('usuarios'));
     }
 
