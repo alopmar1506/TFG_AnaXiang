@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina principal</title>
+    <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usuarios/mostrarUsuarios.css') }}" rel="stylesheet">
+</head>
+
+<body>
+    <header class="cabecera">
+        <nav>
+            <ul>
+                <li><a href="{{ route ('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws"></a>
+                </li>
+                <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
+                <li style="color: white;">|</li>
+                <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="fotoPrincipal">
+        <img src="{{ asset('img/panoramica.jpg') }}" alt="imagen cabecera">
+    </div>
+
+    <main>
+        <section class="introduccion">
+            <div class="bienvenida">
+                <h1 style="color: orange;">¡Bienvenido!🐾</h1>
+                <p><b>HandsPaws</b> es una página en la que podrás encontrar a los mejores cuidadores para
+                    tus amigos peludos, <br>
+                    Además ofrecemos <b>recomendaciones</b> para el cuidado de vuestras
+                    mascotas como por ejemplo de alimentos que pueden o no
+                    comer, que champú usar según <br>
+                    su pelaje o qué juguetes les pueden gustar. <br>
+                    Entra investiga y participa en el blog contándonos tus
+                    <b>experiencias</b> con los consejos usados o con consejos que
+                    puedan ayudar a más gente.
+                </p>
+            </div>
+
+            <div class="formulario">
+                <h2>¿Te gustaría ser el primero en enterarte de nuevos consejos?</h2>
+                <p>Introduce tu correo y suscríbete para ser el primero en enterarte de cualquier actualización.</p>
+                <form action="?">
+                    <label for="name">Nombre</label><br>
+                    <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre"><br>
+                    <label for="email">Correo electrónico</label><br>
+                    <input type="email" name="correo" id="correo" placeholder="Introduce tu correo"><br><br>
+                    <input type="checkbox" name="privacidad" id="privacidad">
+                    <label for="">He leído y acepto la política de privacidad.</label> <br><br>
+                    <button>Suscribirme</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="usuarios">
+            
+            <h1 class="titulo">Listado de usuarios</h1>
+            
+            <form action="{{ route('handspaws') }}" method="GET">
+                <label for="direccion">Ciudad</label>
+                <input type="text" name="direccion" placeholder="Buscar por ciudad">
+                <input type="submit" value="Filtrar">
+            </form>
+            @foreach($usuarios as $usuario)
+                <div class="cuadroUsuarios">
+                    <ul class="listaOficinas">
+                        <li><a href="{{route('editarUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
+                        <li>{{$usuario->direccion}}</a></li>
+                        <li>{{$usuario->especie}}</a></li>
+                    </ul>
+                </div>
+            @endforeach
+        </section>
+    </main>
+    <footer class="pie">
+        <div class="autora">
+            <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>
+            <p>2023-2024 | Ana Xiang López Martínez</p>
+        </div>
+        <div class="footerDerecha">
+            <div class="redesSociales">
+                <img src="img/twitter.svg">
+                <img src="img/youtube.svg">
+                <img src="img/instagram.svg">
+            </div>
+            <div class="enlaces">
+                <p><a href="#">Política de privacidad</a></p>
+                <p><a href="#">Política de cookies</a></p>
+                <p><a href="#">Aviso legal</a></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
