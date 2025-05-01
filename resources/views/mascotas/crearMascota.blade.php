@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados de {{ $oficina->nombre }}</title>
+    <title>Crear usuario</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usuarios/registroUsuarioStyle.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -23,7 +24,32 @@
         </nav>
     </header>
 
-    <button type="submit"><a href="{{ route('crearMascota') }}"></a></button>
+    <h1 class="titulo">Crear usuario</h1>
+    <form method="post" action="{{ route('guardarMascota')}}" class="formularioRegistro" enctype="multipart/form-data">
+        @csrf
+        <label for="nombreMascota">Nombre de la mascota:</label>
+        <input type="text" id="nombreMascota" name="nombreMascota">
+        <br>
+        <label for="especie">Especie de la mascota:</label>
+        <select id="especie" name="especie">
+            <option value="">Seleccione una especie</option>
+            <option value="perro">Perro</option>
+            <option value="gato">Gato</option>
+        </select>
+        <br>
+        <label for="tamanio">Tamaño de la mascota:</label>
+        <select id="tamanio" name="tamanio">
+            <option value="">Seleccione un tamaño</option>
+            <option value="pequeño">Pequeño</option>
+            <option value="mediano">Mediano</option>
+            <option value="grande">Grande</option>
+        </select>
+        <br>
+        <label for="fotoMascota">Foto de la mascota:</label>
+        <input type="file" id="fotoMascota" name="fotoMascota">
+        <br>
+        <button type="submit">Guardar</button>
+    </form>
 
     <footer class="pie">
         <div class="autora">

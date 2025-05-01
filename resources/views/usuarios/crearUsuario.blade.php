@@ -42,26 +42,8 @@
         <label for="contrasena">Contraseña:</label>
         <input type="password" id="contrasena" name="contrasena">
         <br>
-        <label for="especie">Especie de la mascota:</label>
-        <select id="especie" name="especie">
-            <option value="">Seleccione una especie</option>
-            <option value="perro">Perro</option>
-            <option value="gato">Gato</option>
-        </select>
-        <br>
         <label for="fotoUsuario">Foto usuario:</label>
         <input type="file" id="fotoUsuario" name="fotoUsuario">
-        <br>
-        <label for="tamanio">Tamaño de la mascota:</label>
-        <select id="tamanio" name="tamanio">
-            <option value="">Seleccione un tamaño</option>
-            <option value="pequeño">Pequeño</option>
-            <option value="mediano">Mediano</option>
-            <option value="grande">Grande</option>
-        </select>
-        <br>
-        <label for="fotoMascota">Foto de la mascota:</label>
-        <input type="file" id="fotoMascota" name="fotoMascota">
         <br>
         <label for="descripcion">Describete para que los demás usuarios sepan de ti:</label>
         <input type="text" id="descripcion" name="descripcion">

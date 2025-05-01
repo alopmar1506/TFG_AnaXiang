@@ -51,10 +51,17 @@ class perfilController extends Controller
      */
     public function show(string $id)
     {
-        $usuarios= Usuario::find(1);
-        $motos=$usuarios->motos;
-        $motosQuery=$usuarios->motos;
+        // Buscar el usuario por ID
+        $usuario = Usuario::find($id);
+    
+        // Verificar si el usuario existe
+        if (!$usuario) {
+            return redirect()->route('handspaws')->with('error', 'Usuario no encontrado.');
+        }
+    
+        return view('perfilUsuario', compact('usuario'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

@@ -30,7 +30,14 @@ class mascotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombreMascota' => 'required',
+            'especie' => 'required',
+            'tamanio' => 'required',
+            'fotoMascota' => 'required',  
+        ]);
+        Usuario::create($request->all());
+        return redirect()->route('handspaws');
     }
 
     /**

@@ -18,10 +18,8 @@ return new class extends Migration
             $table->string('direccion');
             $table->string('email')->unique();
             $table->string('contrasena')->unique();
-            $table->string('especie');
             $table->string('rol');
             $table->string('fotoUsuario');
-            $table->string('fotoMascota');
             $table->string('descripcion');
             $table->string('opinion');
             $table->timestamps();

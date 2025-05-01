@@ -35,14 +35,10 @@ class usuarioController extends Controller
             'direccion' => 'required',
             'email' => 'required|unique:usuarios',
             'contrasena' => 'required|unique:usuarios',
-            'especie'=> 'required',
             'rol' => 'nullable',   
             'fotoUsuario'=> 'required', 
             'descripcion'=> 'required',      
             'opinion'=>'nullable',     
-            'nombreMascota'=>'required',
-            'tamanio'=>'required',
-            'fotoMascota'=>'required',
         ]);
         Usuario::create($request->all());
         return redirect()->route('handspaws');
@@ -78,14 +74,10 @@ class usuarioController extends Controller
             'direccion' => 'required',
             'email' => 'required|unique:usuarios',
             'contrasena' => 'required|unique:usuarios',
-            'especie'=> 'required',
             'rol' => 'requiered',   
             'fotoUsuario'=> 'required', 
             'descripcion'=> 'required',      
             'opinion'=>'nullable',     
-            'nombreMascota'=>'nullable',
-            'tamanio'=>'nullable',
-            'fotoMascota'=>'nullable',
         ]);
         $usuario->update($request->all());
         return redirect()->route('index');
