@@ -10,11 +10,22 @@ class usuarioController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = Usuario::all();
-        return view('index',compact('usuarios'));
+        // Recoge el valor de la ciudad si se envió por GET
+        $ciudad = $request->input('direccion');
+    
+        if ($ciudad) {
+            // Si hay filtro, busca usuarios cuya dirección contenga la ciudad (ignorando mayúsculas/minúsculas)
+            $usuarios = Usuario::where('direccion', 'LIKE', '%' . $ciudad . '%')->get();
+        } else {
+            // Si no hay filtro, muestra todos
+            $usuarios = Usuario::all();
+        }
+    
+        return view('index', compact('usuarios'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

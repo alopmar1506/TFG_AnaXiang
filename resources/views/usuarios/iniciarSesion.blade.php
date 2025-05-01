@@ -24,7 +24,7 @@
     </header>
 
     <h1 class="titulo">Inicio sesión</h1>
-    <form method="get" action="{{ route('perfilUsuario') }}" class="formularioRegistro">
+    <form method="get" action="{{ route('iniciarSesion',) }}" class="formularioRegistro">
         @csrf
         <br>
         <label for="email">Email:</label>

@@ -42,20 +42,6 @@
                     puedan ayudar a más gente.
                 </p>
             </div>
-
-            <div class="formulario">
-                <h2>¿Te gustaría ser el primero en enterarte de nuevos consejos?</h2>
-                <p>Introduce tu correo y suscríbete para ser el primero en enterarte de cualquier actualización.</p>
-                <form action="?">
-                    <label for="name">Nombre</label><br>
-                    <input type="text" name="nombre" id="nombre" placeholder="Introduce tu nombre"><br>
-                    <label for="email">Correo electrónico</label><br>
-                    <input type="email" name="correo" id="correo" placeholder="Introduce tu correo"><br><br>
-                    <input type="checkbox" name="privacidad" id="privacidad">
-                    <label for="">He leído y acepto la política de privacidad.</label> <br><br>
-                    <button>Suscribirme</button>
-                </form>
-            </div>
         </section>
 
         <section class="usuarios">
@@ -64,15 +50,16 @@
             
             <form action="{{ route('handspaws') }}" method="GET">
                 <label for="direccion">Ciudad</label>
-                <input type="text" name="direccion" placeholder="Buscar por ciudad">
+                <input type="text" name="direccion" placeholder="Buscar por ciudad" value="{{ request('direccion') }}">
                 <input type="submit" value="Filtrar">
             </form>
             @foreach($usuarios as $usuario)
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
+                        <li><img src="{{ asset("img/avatarjpg.jpg") }}" alt=""></li>
                         <li><a href="{{route('editarUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
-                        <li>{{$usuario->especie}}</a></li>
+
                     </ul>
                 </div>
             @endforeach
