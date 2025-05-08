@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\perfilController;
 use App\Http\Controllers\usuarioController;
+use App\Http\Controllers\mascotaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,7 +20,9 @@ Route::put('index/{id}', [UsuarioController::class, 'update'])->name('actualizar
 
 //PERFIL
 Route::get('iniciarSesion', [perfilController::class,'index'])->name(name: 'iniciarSesion');
-Route::get('perfilUsuario', [perfilController::class,'show'])->name('perfilUsuario');
 
 
 //MASCOTAS
+Route::get('index', [mascotaController::class, 'index'])->name('handspaws');
+Route::get('crearMascota', [mascotaController::class, 'create'])->name('crearMascota');
+Route::post('handspaws', [mascotaController::class, 'store'])->name('guardarMascota');

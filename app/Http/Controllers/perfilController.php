@@ -34,13 +34,17 @@ class perfilController extends Controller
             'email' => 'required|email',
             'contrasena' => 'required',
         ]);
-
-        $credentials = $request->only('email', 'contrasena');
-        if (Usuario::attempt($credentials)) {
+    
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->contrasena,
+        ];
+    
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('usuario');
+            return redirect()->route('handspaws');
         }
-
+    
         return back()->withErrors([
             'email' => 'Las credenciales no coinciden con nuestros registros.',
         ]);
@@ -51,16 +55,8 @@ class perfilController extends Controller
      */
     public function show(string $id)
     {
-        // Buscar el usuario por ID
-        $usuario = Usuario::find($id);
-    
-        // Verificar si el usuario existe
-        if (!$usuario) {
-            return redirect()->route('handspaws')->with('error', 'Usuario no encontrado.');
-        }
-    
-        return view('perfilUsuario', compact('usuario'));
-    }
+        //
+    }    
     
 
     /**

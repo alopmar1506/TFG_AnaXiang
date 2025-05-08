@@ -12,17 +12,31 @@ class mascotaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        
+        $direccion = $request->input('direccion');
+    
+        // Filtrado de usuarios por dirección
+        if ($direccion) {
+            $usuarios = Usuario::where('direccion', 'LIKE', '%' . $direccion . '%')->get();
+        } else {
+            $usuarios = Usuario::all();
+        }
+    
+        // Obtener todas las mascotas
+        $mascotas = Mascota::all();
+    
+        return view('index', compact('usuarios', 'mascotas'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view('mascotas/crearMascota');
+
     }
 
     /**
@@ -34,9 +48,9 @@ class mascotaController extends Controller
             'nombreMascota' => 'required',
             'especie' => 'required',
             'tamanio' => 'required',
-            'fotoMascota' => 'required',  
+            'fotoMascota' => 'required',
         ]);
-        Usuario::create($request->all());
+        Mascota::create($request->all());
         return redirect()->route('handspaws');
     }
 

@@ -12,30 +12,25 @@
 <span>{{ $error }}</span> <br>
 @endforeach
 <h1>Edición del coche {{$usuario->nombre}}</h1>
-<form method="post" action="{{ route('actualizarUsuario',$usuario->id  )}}">
+<form method="post" action="{{ route('actualizarUsuario',$usuario->id)}}">
     @csrf
     @method('PUT')
-    <input type="text" name="nombre" id="nombre" placeholder="Marca del coche" value="{{old('nombre',$usuario->nombre)}}">
+    <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre" value="{{old('nombre',$usuario->nombre)}}">
     <br>
-    <input type="text" name="apellido" id="apellido" placeholder="Modelo del coche" value="{{old('apellido',$usuario->apellido)}}">
+    <input type="text" name="apellido" id="apellido" placeholder="Introduce el apellido" value="{{old('apellido',$usuario->apellido)}}">
     <br>
-    <input type="text" name="direccion" id="direccion" placeholder="Color del coche" value="{{old('direccion',$usuario->direccion)}}">
+    <input type="text" name="direccion" id="direccion" placeholder="Introduce la direccion" value="{{old('direccion',$usuario->direccion)}}">
     <br>
-    <input type="text" name="email" id="email" placeholder="Matricula del coche" value="{{old('email',$usuario->email)}}">
+    <input type="text" name="email" id="email" placeholder="Introduce el email" value="{{old('email',$usuario->email)}}">
     <br>
-    <input type="text" name="contrasena" id="contrasena" placeholder="Matricula del coche" value="{{old('contrasena',$usuario->contrasena)}}">
+    <input type="text" name="contrasena" id="contrasena" placeholder="Introduce la contraseña" value="{{old('contrasena',$usuario->contrasena)}}">
     <br>
-    <input type="text" name="especie" id="especie" placeholder="Matricula del coche" value="{{old('especie',$usuario->especie)}}">
+    <input type="file" name="fotoUsuario" id="fotoUsuario" value="{{old('fotoUsuario',$usuario->fotoUsuario)}}">
     <br>
-    <input type="text" name="fotoUsuario" id="fotoUsuario" placeholder="Matricula del coche" value="{{old('fotoUsuario',$usuario->fotoUsuario)}}">
+    <input type="text" name="descripcion" id="descripcion" placeholder="Introduce la descripción" value="{{old('descripcion',$usuario->descripcion)}}">
     <br>
-    <input type="text" name="descripcion" id="descripcion" placeholder="Matricula del coche" value="{{old('descripcion',$usuario->descripcion)}}">
-    <br>
-    <input type="text" name="rol" id="rol" placeholder="Matricula del coche" value="{{old('rol',$usuario->rol)}}">
-    <br>
-    <input type="submit" value="Actualizar coche">
+    <input type="submit" value="Actualizar información">
 </form>
 </body>
 </html>
-
 

@@ -11,7 +11,7 @@ class Usuario extends Model
     use HasFactory;
     protected $fillable = ['nombre','apellido','direccion','email','contrasena','especie','rol', 'fotoUsuario', 'fotoMascota','descripcion', 'opinion'];
 
-    public function mascotas()
+    public function mascota()
     {
         return $this->hasMany(Mascota::class);
     }

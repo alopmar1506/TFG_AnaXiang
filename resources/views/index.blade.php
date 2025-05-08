@@ -7,13 +7,15 @@
     <title>Pagina principal</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usuarios/mostrarUsuarios.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
     <header class="cabecera">
         <nav>
             <ul>
-                <li><a href="{{ route ('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws"></a>
+                <li><a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
+                            alt="logoHandsPaws"></a>
                 </li>
                 <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
                 <li style="color: white;">|</li>
@@ -45,9 +47,9 @@
         </section>
 
         <section class="usuarios">
-            
-            <h1 class="titulo">Listado de usuarios</h1>
-            
+
+            <h1 class="titulo">Cuidadores</h1>
+
             <form action="{{ route('handspaws') }}" method="GET">
                 <label for="direccion">Ciudad</label>
                 <input type="text" name="direccion" placeholder="Buscar por ciudad" value="{{ request('direccion') }}">
@@ -56,14 +58,45 @@
             @foreach($usuarios as $usuario)
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
-                        <li><img src="{{ asset("img/avatarjpg.jpg") }}" alt=""></li>
+                        <li><img src="{{ asset("storage/img/" . $usuario->fotoUsuario) }}" alt=""></li>
                         <li><a href="{{route('editarUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
-
                     </ul>
                 </div>
             @endforeach
         </section>
+
+        <h3 class="mt-5">Mascotas</h3>
+        <div id="mascotasCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach($mascotas->chunk(3) as $chunk)
+                    <div class="carousel-item @if($loop->first) active @endif">
+                        <div class="row">
+                            @foreach($chunk as $mascota)
+                                <div class="col-md-4">
+                                    <div class="card mb-4">
+                                        <img src="{{ asset('img/' . $mascota->foto) }}" class="card-img-top"
+                                            alt="Foto de {{ $mascota->nombre }}">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ $mascota->nombre }}</h5>
+                                            <p class="card-text">Especie: {{ $mascota->especie }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#mascotasCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#mascotasCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
     </main>
     <footer class="pie">
         <div class="autora">

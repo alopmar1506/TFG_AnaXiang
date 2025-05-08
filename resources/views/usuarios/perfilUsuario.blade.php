@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Empleados de {{ $oficina->nombre }}</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
 </head>
-
 <body>
     <header class="cabecera">
         <nav>
@@ -23,7 +21,28 @@
         </nav>
     </header>
 
-    <button type="submit"><a href="{{ route('crearMascota') }}"></a></button>
+    <div class="informacionUsuario">
+        <ul class="">
+            <li>
+                <img src="{{ $usuario->foto ? asset('storage/' . $usuario->fotoUsuario) : asset('img/avatarjpg.jpg') }}"
+                    alt="Foto de {{$usuario->nombre}}">
+            </li>
+            <li>{{ $usuario->nombre }}</li>
+            <li>{{ $usuario->apellido }}</li>
+            <li>{{ $usuario->direccion }}</li>
+            <li>{{ $usuario->email }}</li>
+            <li>{{ $usuario->contrasena }}</li>
+            <li>{{ $usuario->descripcion }}</li>
+
+            <li>{{ $mascota->nombreMascota }}</li>
+            <li>{{ $mascota->fotoMascota}}</li>
+            <li>{{ $mascota->especie}}</li>
+            <li>{{ $mascota->tamanio}}</li>
+        </ul>
+    </div>
+    <button type="submit"><a href="{{ route('editarUsuario') }}"></a>Editar usuario</button>
+    <button type="submit"><a href="{{ route('crearMascota') }}"></a>Añadir mascota</button>
+    <button type="submit"><a href="{{ route('eliminarUsuario') }}"></a>Eliminar usuario</button>
 
     <footer class="pie">
         <div class="autora">

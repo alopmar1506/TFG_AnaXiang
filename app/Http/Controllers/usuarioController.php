@@ -12,14 +12,11 @@ class usuarioController extends Controller
      */
     public function index(Request $request)
     {
-        // Recoge el valor de la ciudad si se envió por GET
         $ciudad = $request->input('direccion');
     
         if ($ciudad) {
-            // Si hay filtro, busca usuarios cuya dirección contenga la ciudad (ignorando mayúsculas/minúsculas)
             $usuarios = Usuario::where('direccion', 'LIKE', '%' . $ciudad . '%')->get();
         } else {
-            // Si no hay filtro, muestra todos
             $usuarios = Usuario::all();
         }
     
@@ -59,12 +56,14 @@ class usuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Usuario $usuarios, string $id)
+    public function show(string $id)
     {
-        $usuarios=Usuario::findOrFail($id);
-        $mascota = $usuarios->mascotas;
-        return view('usuarios/perfilUsuario', compact('perfilUsuario'));
+        $usuario = Usuario::findOrFail($id);
+        $mascota = $usuario->mascotas; // Si hay una relación definida
+    
+        return view('usuarios/perfilUsuario', compact('usuario', 'mascota'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.

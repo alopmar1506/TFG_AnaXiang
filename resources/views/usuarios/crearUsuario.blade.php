@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear usuario</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/usuarios/registroUsuarioStyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usuarios/formularios.css') }}" rel="stylesheet">
 </head>
-
+ 
 <body>
     <header class="cabecera">
         <nav>
