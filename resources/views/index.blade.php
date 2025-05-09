@@ -58,7 +58,7 @@
             @foreach($usuarios as $usuario)
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
-                        <li><img src="{{ asset("storage/img/" . $usuario->fotoUsuario) }}" alt=""></li>
+                        <li><img src="{{ asset("storage/app/public/img" . $usuario->fotoUsuario) }}" alt=""></li>
                         <li><a href="{{route('editarUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
                     </ul>

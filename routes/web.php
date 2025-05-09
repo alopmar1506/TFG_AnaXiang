@@ -13,7 +13,7 @@ Route::get('/', function () {
 Route::get('index', [usuarioController::class,'index'])->name('handspaws');
 Route::get('usuario/{id}', [usuarioController::class, 'show'])->name('perfilUsuario');
 Route::get('crearUsuario', [usuarioController::class, 'create'])->name('crearUsuario');
-Route::post('handspaws', [usuarioController::class, 'store'])->name('guardarUsuario');
+Route::post('index', [usuarioController::class, 'store'])->name('guardarUsuario');
 Route::get('/editarUsuario/{id}', [usuarioController::class, 'edit'])->name('editarUsuario');
 Route::put('index/{id}', [UsuarioController::class, 'update'])->name('actualizarUsuario');
 
