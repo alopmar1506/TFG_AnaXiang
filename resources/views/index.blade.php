@@ -59,7 +59,7 @@
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
                         <li><img src="{{ asset("storage/app/public/img" . $usuario->fotoUsuario) }}" alt=""></li>
-                        <li><a href="{{route('editarUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
+                        <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
                     </ul>
                 </div>

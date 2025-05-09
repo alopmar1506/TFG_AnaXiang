@@ -68,10 +68,12 @@ class usuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Usuario $usuario)
+    public function edit($id)
     {
+        $usuario = Usuario::findOrFail($id);
         return view('usuarios/editarUsuario', compact('usuario'));
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -90,7 +92,7 @@ class usuarioController extends Controller
             'opinion'=>'nullable',     
         ]);
         $usuario->update($request->all());
-        return redirect()->route('index');
+        return redirect()->route('hadnspaws');
     }
     
     /**

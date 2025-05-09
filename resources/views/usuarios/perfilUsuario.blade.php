@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados de {{ $oficina->nombre }}</title>
+    <title>Empleados de {{ $usuario->nombre }}</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -33,16 +33,10 @@
             <li>{{ $usuario->email }}</li>
             <li>{{ $usuario->contrasena }}</li>
             <li>{{ $usuario->descripcion }}</li>
-
-            <li>{{ $mascota->nombreMascota }}</li>
-            <li>{{ $mascota->fotoMascota}}</li>
-            <li>{{ $mascota->especie}}</li>
-            <li>{{ $mascota->tamanio}}</li>
         </ul>
     </div>
-    <button type="submit"><a href="{{ route('editarUsuario') }}"></a>Editar usuario</button>
+    <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
     <button type="submit"><a href="{{ route('crearMascota') }}"></a>Añadir mascota</button>
-    <button type="submit"><a href="{{ route('eliminarUsuario') }}"></a>Eliminar usuario</button>
 
     <footer class="pie">
         <div class="autora">
