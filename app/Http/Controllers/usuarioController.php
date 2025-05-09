@@ -81,18 +81,17 @@ class usuarioController extends Controller
     public function update(Request $request, Usuario $usuario)
     {
         $request->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'direccion' => 'required',
-            'email' => 'required|unique:usuarios',
-            'contrasena' => 'required|unique:usuarios',
-            'rol' => 'requiered',   
-            'fotoUsuario'=> 'required', 
-            'descripcion'=> 'required',      
+            'nombre' => 'nullable',
+            'apellido' => 'nullable',
+            'direccion' => 'nullable',
+
+            'rol' => 'nullable',   
+            'fotoUsuario'=> 'nullable', 
+            'descripcion'=> 'nullable',      
             'opinion'=>'nullable',     
         ]);
         $usuario->update($request->all());
-        return redirect()->route('hadnspaws');
+        return redirect()->route('perfilUsuario');
     }
     
     /**

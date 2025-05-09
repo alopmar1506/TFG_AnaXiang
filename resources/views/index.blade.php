@@ -47,7 +47,6 @@
         </section>
 
         <section class="usuarios">
-
             <h1 class="titulo">Cuidadores</h1>
 
             <form action="{{ route('handspaws') }}" method="GET">

@@ -30,8 +30,6 @@
             <li>{{ $usuario->nombre }}</li>
             <li>{{ $usuario->apellido }}</li>
             <li>{{ $usuario->direccion }}</li>
-            <li>{{ $usuario->email }}</li>
-            <li>{{ $usuario->contrasena }}</li>
             <li>{{ $usuario->descripcion }}</li>
         </ul>
     </div>

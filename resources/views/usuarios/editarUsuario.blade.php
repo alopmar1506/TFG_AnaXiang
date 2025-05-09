@@ -45,7 +45,7 @@
         <input type="text" name="email" id="email" placeholder="Introduce el email"
             value="{{old('email', $usuario->email)}}">
         <br>
-        <input type="text" name="contrasena" id="contrasena" placeholder="Introduce la contraseña"
+        <input type="password" name="contrasena" id="contrasena" placeholder="Introduce la contraseña"
             value="{{old('contrasena', $usuario->contrasena)}}">
         <br>
         <input type="file" name="fotoUsuario" id="fotoUsuario" value="{{old('fotoUsuario', $usuario->fotoUsuario)}}">
@@ -55,6 +55,8 @@
         <br>
         <input type="submit" value="Actualizar información">
     </form>
+
+    <a href="{{ route('perfilUsuario', $usuario->id) }}">Volver al perfil</a>
 
     <footer class="pie">
         <div class="autora">
