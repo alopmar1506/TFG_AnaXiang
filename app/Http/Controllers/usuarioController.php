@@ -13,16 +13,16 @@ class usuarioController extends Controller
     public function index(Request $request)
     {
         $ciudad = $request->input('direccion');
-    
+
         if ($ciudad) {
             $usuarios = Usuario::where('direccion', 'LIKE', '%' . $ciudad . '%')->get();
         } else {
             $usuarios = Usuario::all();
         }
-    
+
         return view('index', compact('usuarios'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -43,15 +43,15 @@ class usuarioController extends Controller
             'direccion' => 'required',
             'email' => 'required|unique:usuarios',
             'contrasena' => 'required|unique:usuarios',
-            'rol' => 'nullable',   
-            'fotoUsuario'=> 'required', 
-            'descripcion'=> 'required',      
-            'opinion'=>'nullable',     
+            'rol' => 'nullable',
+            'fotoUsuario' => 'required',
+            'descripcion' => 'required',
+            'opinion' => 'nullable',
         ]);
         Usuario::create($request->all());
         return redirect()->route('handspaws');
     }
-    
+
 
     /**
      * Display the specified resource.
@@ -60,10 +60,10 @@ class usuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
         $mascota = $usuario->mascotas; // Si hay una relación definida
-    
+
         return view('usuarios/perfilUsuario', compact('usuario', 'mascota'));
     }
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -73,34 +73,50 @@ class usuarioController extends Controller
         $usuario = Usuario::findOrFail($id);
         return view('usuarios/editarUsuario', compact('usuario'));
     }
-    
+
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Usuario $usuario)
-    {
-        $request->validate([
-            'nombre' => 'nullable',
-            'apellido' => 'nullable',
-            'direccion' => 'nullable',
+public function update(Request $request, $id)
+{
+    $usuario = Usuario::findOrFail($id);
 
-            'rol' => 'nullable',   
-            'fotoUsuario'=> 'nullable', 
-            'descripcion'=> 'nullable',      
-            'opinion'=>'nullable',     
-        ]);
-        $usuario->update($request->all());
-        return redirect()->route('perfilUsuario');
+    $request->validate([
+        'nombre' => 'nullable',
+        'apellido' => 'nullable',
+        'direccion' => 'nullable',
+        'fotoUsuario' => 'nullable|image', // asegúrate de que sea imagen si se sube
+        'rol' => 'nullable',   
+        'descripcion'=> 'nullable',      
+        'opinion'=>'nullable',     
+    ]);
+
+    $datos = $request->except('fotoUsuario');
+
+    // Manejar archivo si se sube uno nuevo
+    if ($request->hasFile('fotoUsuario')) {
+        $fotoPath = $request->file('fotoUsuario')->store('fotos', 'public');
+        $datos['fotoUsuario'] = $fotoPath;
+    } else {
+        // Mantener la foto actual si no se sube nueva
+        $datos['fotoUsuario'] = $usuario->fotoUsuario;
     }
-    
+
+    $usuario->update($datos);
+
+    return redirect()->route('perfilUsuario', $usuario->id);
+}
+
+
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        $usuarios=Usuario::findOrFail($id);
+        $usuarios = Usuario::findOrFail($id);
         $usuarios->delete();
-        return redirect()->route('concesionario', $usuarios->id)->with('success','Uusario eliminado correctamente');
+        return redirect()->route('concesionario', $usuarios->id)->with('success', 'Uusario eliminado correctamente');
     }
 }

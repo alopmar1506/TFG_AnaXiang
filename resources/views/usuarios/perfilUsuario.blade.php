@@ -27,10 +27,9 @@
                 <img src="{{ $usuario->foto ? asset('storage/' . $usuario->fotoUsuario) : asset('img/avatarjpg.jpg') }}"
                     alt="Foto de {{$usuario->nombre}}">
             </li>
-            <li>{{ $usuario->nombre }}</li>
-            <li>{{ $usuario->apellido }}</li>
-            <li>{{ $usuario->direccion }}</li>
-            <li>{{ $usuario->descripcion }}</li>
+            <li>Nombre: {{ $usuario->nombre . " ". $usuario->apellido }}</li>
+            <li>Provincia: {{ $usuario->direccion }}</li>
+            <li>Sobre mi: {{ $usuario->descripcion }}</li>
         </ul>
     </div>
     <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
