@@ -33,7 +33,7 @@
         </ul>
     </div>
     <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
-    <button type="submit"><a href="{{ route('crearMascota') }}"></a>Añadir mascota</button>
+    <a href="{{ route('crearMascota', $usuario->id) }}">Añadir mascota</a>
 
     <footer class="pie">
         <div class="autora">

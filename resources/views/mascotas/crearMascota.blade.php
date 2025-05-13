@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear usuario</title>
+    <title>Crear mascota</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usuarios/registroUsuarioStyle.css') }}" rel="stylesheet">
 </head>
@@ -24,7 +24,7 @@
         </nav>
     </header>
 
-    <h1 class="titulo">Crear usuario</h1>
+    <h1 class="titulo"></h1>
     <form method="post" action="{{ route('guardarMascota')}}" class="formularioRegistro" enctype="multipart/form-data">
         @csrf
         <label for="nombreMascota">Nombre de la mascota:</label>
