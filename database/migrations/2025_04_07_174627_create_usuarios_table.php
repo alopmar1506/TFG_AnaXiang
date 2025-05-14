@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('rol');
             $table->string('fotoUsuario');
             $table->string('descripcion');
-            $table->string('opinion');
             $table->timestamps();
         });
     }

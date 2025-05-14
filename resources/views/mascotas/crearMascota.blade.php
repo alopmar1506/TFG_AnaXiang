@@ -13,19 +13,36 @@
     <header class="cabecera">
         <nav>
             <ul>
-                <li><a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
-                            alt="logoHandsPaws"></a>
-                </li>
-                <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
-                <li style="color: white;">|</li>
-                <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a>
-                </li>
+                <li><a href="{{ route('handspaws') }}">
+                        <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
+                    </a></li>
+
+                @auth
+                    <li class="dropdown">
+                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                        <ul class="submenu">
+                            <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
+                                        sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
+                    <li style="color: white;">|</li>
+                    <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a></li>
+                @endauth
             </ul>
         </nav>
     </header>
 
     <h1 class="titulo"></h1>
-    <form method="post" action="{{ route('guardarMascota')}}" class="formularioRegistro" enctype="multipart/form-data">
+    <form method="post" action="{{ route('guardarMascota', $mascota->id_usuario)}}" class="formularioRegistro" enctype="multipart/form-data">
         @csrf
         <label for="nombreMascota">Nombre de la mascota:</label>
         <input type="text" id="nombreMascota" name="nombreMascota">

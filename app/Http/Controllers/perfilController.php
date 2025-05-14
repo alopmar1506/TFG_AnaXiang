@@ -13,7 +13,7 @@ class perfilController extends Controller
      */
     public function index()
     {
-        $usuarios=Usuario::all();
+        $usuarios = Usuario::all();
         return view('usuarios/iniciarSesion');
     }
 
@@ -28,27 +28,29 @@ class perfilController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
             'contrasena' => 'required',
         ]);
-    
+
         $credentials = [
             'email' => $request->email,
-            'password' => $request->contrasena,
+            'password' => $request->contrasena, // Laravel usará getAuthPassword()
         ];
-    
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('handspaws');
         }
-    
+
         return back()->withErrors([
-            'email' => 'Las credenciales no coinciden con nuestros registros.',
+            'email' => 'Las credenciales no coinciden.',
         ]);
     }
+
 
     /**
      * Display the specified resource.
@@ -56,8 +58,8 @@ class perfilController extends Controller
     public function show(string $id)
     {
         //
-    }    
-    
+    }
+
 
     /**
      * Show the form for editing the specified resource.

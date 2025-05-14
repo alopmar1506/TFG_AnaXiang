@@ -52,6 +52,28 @@ body {
     color: white;
 }
 
+/**DESPLEGABLE**/
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.submenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    z-index: 1;
+}
+
+.dropdown:hover .submenu {
+    display: block;
+}
+
+.submenu li {
+    padding: 12px;
+}
+
+
 /*------------------------------------------------*/
 /*FOOTER*/
 .pie {

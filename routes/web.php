@@ -21,6 +21,18 @@ Route::put('perfilUsuario/{id}', [UsuarioController::class, 'update'])->name('ac
 //PERFIL
 Route::get('iniciarSesion', [perfilController::class,'index'])->name(name: 'iniciarSesion');
 
+// Procesar login
+Route::post('/iniciarSesion', [perfilController::class, 'store'])->name('procesarLogin');
+
+// Cerrar sesión
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect()->route('handspaws'); // 👈 Esto redirige a /index
+})->name('logout');
+
+
 
 //MASCOTAS
 Route::get('index', [mascotaController::class, 'index'])->name('handspaws');

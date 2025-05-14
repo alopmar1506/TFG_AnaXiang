@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Usuario;
+use Illuminate\Support\Facades\Hash;
 
 class usuarioController extends Controller
 {
@@ -35,23 +36,30 @@ class usuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nombre' => 'required',
-            'apellido' => 'required',
-            'direccion' => 'required',
-            'email' => 'required|unique:usuarios',
-            'contrasena' => 'required|unique:usuarios',
-            'rol' => 'nullable',
-            'fotoUsuario' => 'required',
-            'descripcion' => 'required',
-            'opinion' => 'nullable',
-        ]);
-        Usuario::create($request->all());
-        return redirect()->route('handspaws');
-    }
 
+public function store(Request $request)
+{
+    $request->validate([
+        'nombre' => 'required',
+        'apellido' => 'required',
+        'direccion' => 'required',
+        'email' => 'required|unique:usuarios',
+        'contrasena' => 'required',
+        'rol' => 'nullable',
+        'fotoUsuario' => 'required',
+        'descripcion' => 'required',
+        'opinion' => 'nullable',
+    ]);
+
+    // ✅ Hashear la contraseña antes de guardar
+    $request->merge([
+        'contrasena' => Hash::make($request->contrasena)
+    ]);
+
+    Usuario::create($request->all());
+
+    return redirect()->route('handspaws');
+}
 
     /**
      * Display the specified resource.
@@ -78,35 +86,34 @@ class usuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-public function update(Request $request, $id)
-{
-    $usuario = Usuario::findOrFail($id);
+    public function update(Request $request, $id)
+    {
+        $usuario = Usuario::findOrFail($id);
 
-    $request->validate([
-        'nombre' => 'nullable',
-        'apellido' => 'nullable',
-        'direccion' => 'nullable',
-        'fotoUsuario' => 'nullable|image', // asegúrate de que sea imagen si se sube
-        'rol' => 'nullable',   
-        'descripcion'=> 'nullable',      
-        'opinion'=>'nullable',     
-    ]);
+        $request->validate([
+            'nombre' => 'nullable',
+            'apellido' => 'nullable',
+            'direccion' => 'nullable',
+            'fotoUsuario' => 'nullable|image',
+            'rol' => 'nullable',
+            'descripcion' => 'nullable',
+        ]);
 
-    $datos = $request->except('fotoUsuario');
+        $datos = $request->except('fotoUsuario');
 
-    // Manejar archivo si se sube uno nuevo
-    if ($request->hasFile('fotoUsuario')) {
-        $fotoPath = $request->file('fotoUsuario')->store('fotos', 'public');
-        $datos['fotoUsuario'] = $fotoPath;
-    } else {
-        // Mantener la foto actual si no se sube nueva
-        $datos['fotoUsuario'] = $usuario->fotoUsuario;
+        // Manejar archivo si se sube uno nuevo
+        if ($request->hasFile('fotoUsuario')) {
+            $fotoPath = $request->file('fotoUsuario')->store('fotos', 'public');
+            $datos['fotoUsuario'] = $fotoPath;
+        } else {
+            // Mantener la foto actual si no se sube nueva
+            $datos['fotoUsuario'] = $usuario->fotoUsuario;
+        }
+
+        $usuario->update($datos);
+
+        return redirect()->route('perfilUsuario', $usuario->id);
     }
-
-    $usuario->update($datos);
-
-    return redirect()->route('perfilUsuario', $usuario->id);
-}
 
 
 
