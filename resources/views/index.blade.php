@@ -74,7 +74,8 @@
             @foreach($usuarios as $usuario)
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
-                        <li><img src="{{ asset("storage/app/public/img" . $usuario->fotoUsuario) }}" alt=""></li>
+                        <li><img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
+                                            alt="Foto de {{ $usuario->nombUsuario }}"></li>
                         <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
                     </ul>
@@ -91,10 +92,10 @@
                             @foreach($chunk as $mascota)
                                 <div class="col-md-4">
                                     <div class="card mb-4">
-                                        <img src="{{ asset('img/' . $mascota->foto) }}" class="card-img-top"
-                                            alt="Foto de {{ $mascota->nombre }}">
+                                        <img src="{{ asset('storage/' . $mascota->fotoMascota) }}" class="card-img-top"
+                                            alt="Foto de {{ $mascota->nombreMascota }}">
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $mascota->nombre }}</h5>
+                                            <p class="card-title">Nombre: {{ $mascota->nombreMascota }}</p>
                                             <p class="card-text">Especie: {{ $mascota->especie }}</p>
                                         </div>
                                     </div>

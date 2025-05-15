@@ -16,7 +16,6 @@
                 <li><a href="{{ route('handspaws') }}">
                         <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
                     </a></li>
-
                 @auth
                     <li class="dropdown">
                         <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
@@ -42,7 +41,7 @@
     </header>
 
     <h1 class="titulo"></h1>
-    <form method="post" action="{{ route('guardarMascota', $mascota->id_usuario)}}" class="formularioRegistro" enctype="multipart/form-data">
+    <form method="post" action="{{ route('guardarMascota')}}" class="formularioRegistro" enctype="multipart/form-data">
         @csrf
         <label for="nombreMascota">Nombre de la mascota:</label>
         <input type="text" id="nombreMascota" name="nombreMascota">

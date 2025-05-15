@@ -47,7 +47,7 @@
         <span>{{ $error }}</span> <br>
     @endforeach
     <h1>Editar usuario {{$usuario->nombre}}</h1>
-    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}">
+    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre"

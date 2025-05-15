@@ -1,44 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Empleados de {{ $usuario->nombre }}</title>
+    <title>Tu perfil</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
 </head>
+
 <body>
     <header class="cabecera">
         <nav>
             <ul>
-                <li><a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
-                            alt="logoHandsPaws"></a>
-                </li>
-                <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
-                <li style="color: white;">|</li>
-                <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a>
-                </li>
+                <li><a href="{{ route('handspaws') }}">
+                        <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
+                    </a></li>
+
+                @auth
+                    <li class="dropdown">
+                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                        <ul class="submenu">
+                            <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit"
+                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
+                                        sesión</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+                @else
+                    <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
+                    <li style="color: white;">|</li>
+                    <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a></li>
+                @endauth
             </ul>
         </nav>
     </header>
 
+    <h2>Tu información: </h2>
     <div class="informacionUsuario">
         <ul class="">
-            <li>
-                <img src="{{ $usuario->foto ? asset('storage/' . $usuario->fotoUsuario) : asset('img/avatarjpg.jpg') }}"
-                    alt="Foto de {{$usuario->nombre}}">
-            </li>
-            <li>Nombre: {{ $usuario->nombre . " ". $usuario->apellido }}</li>
+            <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
+                alt="Foto de {{ $usuario->nombUsuario }}">
+            <li>Nombre: {{ $usuario->nombre . " " . $usuario->apellido }}</li>
             <li>Provincia: {{ $usuario->direccion }}</li>
             <li>Sobre mi: {{ $usuario->descripcion }}</li>
         </ul>
     </div>
+
+    <h2>Tus mascotas: </h2>
     <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
-    <a href="{{ route('crearMascota', $usuario->id) }}">Añadir mascota</a>
+    <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+    <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
+        @csrf
+        @method('DELETE')
+        <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+            Eliminar usuario
+        </button>
+    </form>
+
 
     <footer class="pie">
         <div class="autora">
             <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>
-            <p>2023-2024 | Ana Xiang López Martínez</p>
+            <p>2024-2025 | Ana Xiang López Martínez</p>
         </div>
         <div class="footerDerecha">
             <div class="redesSociales">

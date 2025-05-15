@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Mascota;
 use App\Models\Usuario;
@@ -15,20 +15,20 @@ class mascotaController extends Controller
     public function index(Request $request)
     {
         $direccion = $request->input('direccion');
-    
+
         // Filtrado de usuarios por dirección
         if ($direccion) {
             $usuarios = Usuario::where('direccion', 'LIKE', '%' . $direccion . '%')->get();
         } else {
             $usuarios = Usuario::all();
         }
-    
+
         // Obtener todas las mascotas
         $mascotas = Mascota::all();
-    
+
         return view('index', compact('usuarios', 'mascotas'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -42,17 +42,29 @@ class mascotaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
     public function store(Request $request)
     {
         $request->validate([
             'nombreMascota' => 'required',
             'especie' => 'required',
             'tamanio' => 'required',
-            'fotoMascota' => 'required',
+            'fotoMascota' => 'required|image|max:2048',
         ]);
-        Mascota::create($request->all());
-        return redirect()->route('handspaws');
+
+        $fotoPath = $request->file('fotoMascota')->store('mascotas', 'public');
+
+        Mascota::create([
+            'nombreMascota' => $request->nombreMascota,
+            'especie' => $request->especie,
+            'tamanio' => $request->tamanio,
+            'fotoMascota' => $fotoPath,
+            'usuario_id' => Auth::id(), // 👈 Aquí se asigna el usuario autenticado
+        ]);
+
+        return redirect()->route('perfilUsuario');
     }
+
 
     /**
      * Display the specified resource.

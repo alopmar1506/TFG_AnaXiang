@@ -37,29 +37,36 @@ class usuarioController extends Controller
      * Store a newly created resource in storage.
      */
 
-public function store(Request $request)
-{
-    $request->validate([
-        'nombre' => 'required',
-        'apellido' => 'required',
-        'direccion' => 'required',
-        'email' => 'required|unique:usuarios',
-        'contrasena' => 'required',
-        'rol' => 'nullable',
-        'fotoUsuario' => 'required',
-        'descripcion' => 'required',
-        'opinion' => 'nullable',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required',
+            'apellido' => 'required',
+            'direccion' => 'required',
+            'email' => 'required|unique:usuarios',
+            'contrasena' => 'required',
+            'rol' => 'nullable',
+            'fotoUsuario' => 'required',
+            'descripcion' => 'required',
+            'opinion' => 'nullable',
+        ]);
 
-    // ✅ Hashear la contraseña antes de guardar
-    $request->merge([
-        'contrasena' => Hash::make($request->contrasena)
-    ]);
+        $fotoPathUsuario = $request->file('fotoUsuario')->store('usuarios', 'public');
 
-    Usuario::create($request->all());
 
-    return redirect()->route('handspaws');
-}
+        Usuario::create([
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'direccion' => $request->direccion,
+            'email' => $request->email,
+            'contrasena' => Hash::make($request->contrasena),
+            'rol' => $request->rol,
+            'fotoUsuario' => $fotoPathUsuario,
+            'descripcion' => $request->descripcion,
+        ]);
+
+        return redirect()->route('handspaws');
+    }
 
     /**
      * Display the specified resource.
@@ -122,8 +129,8 @@ public function store(Request $request)
      */
     public function destroy(string $id)
     {
-        $usuarios = Usuario::findOrFail($id);
-        $usuarios->delete();
-        return redirect()->route('concesionario', $usuarios->id)->with('success', 'Uusario eliminado correctamente');
+        $usuario = Usuario::findOrFail($id);
+        $usuario->delete();
+return redirect()->route('handspaws')->with('success', 'Usuario eliminado correctamente');
     }
 }

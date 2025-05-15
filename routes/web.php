@@ -15,7 +15,8 @@ Route::get('usuario/{id}', [usuarioController::class, 'show'])->name('perfilUsua
 Route::get('crearUsuario', [usuarioController::class, 'create'])->name('crearUsuario');
 Route::post('index', [usuarioController::class, 'store'])->name('guardarUsuario');
 Route::get('/editarUsuario/{id}', [usuarioController::class, 'edit'])->name('editarUsuario');
-Route::put('perfilUsuario/{id}', [UsuarioController::class, 'update'])->name('actualizarUsuario');
+Route::put('/perfilUsuario/{id}', [UsuarioController::class, 'update'])->name('actualizarUsuario');
+Route::delete('/perfilUsuario/{id}', [UsuarioController::class, 'destroy'])->name('eliminarUsuario');
 
 
 //PERFIL
