@@ -74,8 +74,8 @@
             @foreach($usuarios as $usuario)
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
-                        <li><img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
-                                            alt="Foto de {{ $usuario->nombUsuario }}"></li>
+                        <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
+                                            alt="Foto de {{ $usuario->nombUsuario }}">
                         <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
                     </ul>

@@ -54,6 +54,7 @@
     <h2>Tus mascotas: </h2>
     <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
     <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+
     <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
         @csrf
         @method('DELETE')

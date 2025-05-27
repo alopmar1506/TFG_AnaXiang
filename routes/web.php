@@ -37,5 +37,5 @@ Route::post('/logout', function () {
 
 //MASCOTAS
 Route::get('index', [mascotaController::class, 'index'])->name('handspaws');
-Route::get('crearMascota', [mascotaController::class, 'create'])->name('crearMascota');
+Route::get('crearMascota/', [mascotaController::class, 'create'])->name('crearMascota');
 Route::post('handspaws', [mascotaController::class, 'store'])->name('guardarMascota');

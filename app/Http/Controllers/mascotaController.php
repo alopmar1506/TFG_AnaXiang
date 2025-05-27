@@ -59,10 +59,9 @@ class mascotaController extends Controller
             'especie' => $request->especie,
             'tamanio' => $request->tamanio,
             'fotoMascota' => $fotoPath,
-            'usuario_id' => Auth::id(), // 👈 Aquí se asigna el usuario autenticado
+            'usuario_id' => Auth::id(),
         ]);
-
-        return redirect()->route('perfilUsuario');
+        return redirect()->route('perfilUsuario', ['id' => Auth::id()]);
     }
 
 
@@ -95,6 +94,7 @@ class mascotaController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
+
 }

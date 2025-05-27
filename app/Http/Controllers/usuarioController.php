@@ -131,6 +131,6 @@ class usuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
         $usuario->delete();
-return redirect()->route('handspaws')->with('success', 'Usuario eliminado correctamente');
+        return redirect()->route('handspaws')->with('success', 'Usuario eliminado correctamente');
     }
 }
