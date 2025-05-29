@@ -13,9 +13,9 @@ class perfilController extends Controller
      */
     public function index()
     {
-        $usuarios = Usuario::all();
         return view('usuarios/iniciarSesion');
     }
+
 
     /**
      * Show the form for creating a new resource.

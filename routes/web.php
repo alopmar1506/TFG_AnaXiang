@@ -21,16 +21,12 @@ Route::delete('/perfilUsuario/{id}', [UsuarioController::class, 'destroy'])->nam
 
 //PERFIL
 Route::get('iniciarSesion', [perfilController::class,'index'])->name(name: 'iniciarSesion');
-
-// Procesar login
 Route::post('/iniciarSesion', [perfilController::class, 'store'])->name('procesarLogin');
-
-// Cerrar sesión
 Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
-    return redirect()->route('handspaws'); // 👈 Esto redirige a /index
+    return redirect()->route('handspaws'); 
 })->name('logout');
 
 

@@ -52,22 +52,29 @@
     </div>
 
     <h2>Tus mascotas: </h2>
-    <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
-    <a href="{{ route('crearMascota') }}">Añadir mascota</a>
 
-    <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
-            Eliminar usuario
-        </button>
-    </form>
+    @auth
+        @if (Auth::id() === $usuario->id)
+            <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
+            <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+
+            <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
+                @csrf
+                @method('DELETE')
+                <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                    Eliminar usuario
+                </button>
+            </form>
+        @endif
+    @endauth
+
 
 
     <footer class="pie">
         <div class="autora">
-            <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>
-            <p>2024-2025 | Ana Xiang López Martínez</p>
+            <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
+                    alt="logoHandsPaws"></a>
+            <p>2023-2024 | Ana Xiang López Martínez</p>
         </div>
         <div class="footerDerecha">
             <div class="redesSociales">

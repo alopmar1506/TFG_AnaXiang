@@ -75,7 +75,7 @@
                 <div class="cuadroUsuarios">
                     <ul class="listaOficinas">
                         <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
-                                            alt="Foto de {{ $usuario->nombUsuario }}">
+                            alt="Foto de {{ $usuario->nombUsuario }}">
                         <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
                         <li>{{$usuario->direccion}}</a></li>
                     </ul>
@@ -117,7 +117,7 @@
     </main>
     <footer class="pie">
         <div class="autora">
-            <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>
+            <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws"></a>
             <p>2023-2024 | Ana Xiang López Martínez</p>
         </div>
         <div class="footerDerecha">
