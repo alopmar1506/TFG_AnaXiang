@@ -35,3 +35,4 @@ Route::post('/logout', function () {
 Route::get('index', [mascotaController::class, 'index'])->name('handspaws');
 Route::get('crearMascota/', [mascotaController::class, 'create'])->name('crearMascota');
 Route::post('handspaws', [mascotaController::class, 'store'])->name('guardarMascota');
+Route::delete('/mascota/{id}', [mascotaController::class, 'destroy'])->name('eliminarMascota');

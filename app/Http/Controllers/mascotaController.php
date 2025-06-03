@@ -90,9 +90,18 @@ class mascotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
+public function destroy(string $id)
+{
+    $mascota = Mascota::findOrFail($id);
 
+    // Verifica que el usuario esté autenticado y sea dueño de la mascota
+    if (Auth::check() && $mascota->usuario_id === Auth::id()) {
+        $mascota->delete();
+        return redirect()->route('perfilUsuario', Auth::id())->with('success', 'Mascota eliminada exitosamente.');
     }
+
+    abort(403, 'No autorizado');
+}
+
 
 }

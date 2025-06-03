@@ -68,8 +68,22 @@
                             <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
                             <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
                         </ul>
+
+                        @auth
+                            @if (Auth::id() === $usuario->id)
+                                <form action="{{ route('eliminarMascota', $mascotas->id) }}" method="POST" style="margin-top: 10px;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta mascota?')"
+                                        class="btn-eliminar">
+                                        Eliminar mascota
+                                    </button>
+                                </form>
+                            @endif
+                        @endauth
                     </div>
                 @endforeach
+
             </div>
         @endif
     </div>
