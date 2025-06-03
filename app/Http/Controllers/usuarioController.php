@@ -74,7 +74,7 @@ class usuarioController extends Controller
     public function show(string $id)
     {
         $usuario = Usuario::findOrFail($id);
-        $mascota = $usuario->mascotas; // Si hay una relación definida
+        $mascota = $usuario->mascotas; 
 
         return view('usuarios/perfilUsuario', compact('usuario', 'mascota'));
     }
@@ -108,12 +108,10 @@ class usuarioController extends Controller
 
         $datos = $request->except('fotoUsuario');
 
-        // Manejar archivo si se sube uno nuevo
         if ($request->hasFile('fotoUsuario')) {
             $fotoPath = $request->file('fotoUsuario')->store('fotos', 'public');
             $datos['fotoUsuario'] = $fotoPath;
         } else {
-            // Mantener la foto actual si no se sube nueva
             $datos['fotoUsuario'] = $usuario->fotoUsuario;
         }
 

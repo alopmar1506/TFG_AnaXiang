@@ -1,3 +1,4 @@
+
 /*GENERAL*
 /*------------------------------------------------*/
 
@@ -207,4 +208,55 @@ body {
 div[class="fotoPrincipal"] img {
     width: 100%;
     height: 80%;
+}
+
+
+/* PERFIL - MASCOTAS */
+.lista-mascotas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.card-mascota {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 200px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.foto-mascota {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+/*PERFIL USUARIO*/
+
+.lista-usuario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.card-usuario {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    border-radius: 10px;
+    width: 200px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.foto-usuario {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }

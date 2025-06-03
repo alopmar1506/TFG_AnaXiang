@@ -22,8 +22,6 @@ class mascotaController extends Controller
         } else {
             $usuarios = Usuario::all();
         }
-
-        // Obtener todas las mascotas
         $mascotas = Mascota::all();
 
         return view('index', compact('usuarios', 'mascotas'));

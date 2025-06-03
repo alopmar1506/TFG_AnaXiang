@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu perfil</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mascotas/mostrarMascotasPerfil.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -52,6 +54,25 @@
     </div>
 
     <h2>Tus mascotas: </h2>
+    <div class="mascotasUsuario">
+        @if ($mascota->isEmpty())
+            <p>No tienes mascotas registradas.</p>
+        @else
+            <div class="lista-mascotas">
+                @foreach ($mascota as $mascotas)
+                    <div class="card-mascota">
+                        <img src="{{ asset('storage/' . $mascotas->fotoMascota) }}" alt="Foto de {{ $mascotas->nombreMascota }}"
+                            class="foto-mascota">
+                        <ul>
+                            <li><strong>Nombre:</strong> {{ $mascotas->nombreMascota }}</li>
+                            <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
+                            <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
+                        </ul>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+    </div>
 
     @auth
         @if (Auth::id() === $usuario->id)
@@ -67,7 +88,6 @@
             </form>
         @endif
     @endauth
-
 
 
     <footer class="pie">

@@ -38,7 +38,7 @@ class perfilController extends Controller
 
         $credentials = [
             'email' => $request->email,
-            'password' => $request->contrasena, // Laravel usará getAuthPassword()
+            'password' => $request->contrasena,
         ];
 
         if (Auth::attempt($credentials)) {

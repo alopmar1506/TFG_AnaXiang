@@ -7,6 +7,7 @@
     <title>Pagina principal</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usuarios/mostrarUsuarios.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/mascotas/mostrarMascotasPerfil.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -71,34 +72,39 @@
                 <input type="text" name="direccion" placeholder="Buscar por ciudad" value="{{ request('direccion') }}">
                 <input type="submit" value="Filtrar">
             </form>
-            @foreach($usuarios as $usuario)
-                <div class="cuadroUsuarios">
-                    <ul class="listaOficinas">
-                        <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="card-img-top"
-                            alt="Foto de {{ $usuario->nombUsuario }}">
-                        <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
-                        <li>{{$usuario->direccion}}</a></li>
-                    </ul>
-                </div>
-            @endforeach
+
+            <div class="mostrarUsuario">
+                @foreach($usuarios as $usuario)
+                    <div class="lista-usuario">
+                        <div class="card-usuario">
+                            <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
+                                alt="Foto de {{ $usuario->nombUsuario }}">
+                            <u>
+                                <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
+                                <li>{{$usuario->direccion}}</li>
+                                </ul>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
         </section>
 
         <h3 class="mt-5">Mascotas</h3>
-        <div id="mascotasCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
+        <form action="{{ route('handspaws') }}" method="GET">
+            <div class="mascotasUsuario">
                 @foreach($mascotas->chunk(3) as $chunk)
                     <div class="carousel-item @if($loop->first) active @endif">
-                        <div class="row">
+                        <div class="lista-mascotas">
                             @foreach($chunk as $mascota)
-                                <div class="col-md-4">
-                                    <div class="card mb-4">
-                                        <img src="{{ asset('storage/' . $mascota->fotoMascota) }}" class="card-img-top"
-                                            alt="Foto de {{ $mascota->nombreMascota }}">
-                                        <div class="card-body">
-                                            <p class="card-title">Nombre: {{ $mascota->nombreMascota }}</p>
-                                            <p class="card-text">Especie: {{ $mascota->especie }}</p>
-                                        </div>
-                                    </div>
+                                <div class="card-mascota">
+                                    <img src="{{ asset('storage/' . $mascota->fotoMascota) }}"
+                                        alt="Foto de {{ $mascota->nombreMascota }}" class="foto-mascota">
+                                    <ul>
+                                        <li><strong>Nombre:</strong> {{ $mascota->nombreMascota }}</li>
+                                        <li><strong>Especie:</strong> {{ $mascota->especie }}</li>
+                                        <li><strong>Tamaño:</strong> {{ $mascota->tamanio }}</li>
+                                    </ul>
                                 </div>
                             @endforeach
                         </div>
@@ -113,11 +119,12 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Siguiente</span>
             </button>
-        </div>
+            </div>
     </main>
     <footer class="pie">
         <div class="autora">
-            <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws"></a>
+            <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
+                    alt="logoHandsPaws"></a>
             <p>2023-2024 | Ana Xiang López Martínez</p>
         </div>
         <div class="footerDerecha">
