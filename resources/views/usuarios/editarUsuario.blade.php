@@ -8,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Formulario editar usuario</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estiloFormularios.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -47,7 +48,7 @@
         <span>{{ $error }}</span> <br>
     @endforeach
     <h1>Editar usuario {{$usuario->nombre}}</h1>
-    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}" enctype="multipart/form-data">
+    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}" enctype="multipart/form-data" class="formularioRegistro">
         @csrf
         @method('PUT')
         <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre"
@@ -70,7 +71,7 @@
         <input type="text" name="descripcion" id="descripcion" placeholder="Introduce la descripción"
             value="{{old('descripcion', $usuario->descripcion)}}">
         <br>
-        <input type="submit" value="Actualizar información">
+        <button type="submit">Actualizar información</button>
     </form>
 
     <a href="{{ route('perfilUsuario', $usuario->id) }}">Volver al perfil</a>

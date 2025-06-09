@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear usuario</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/usuarios/formularios.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estiloFormularios.css') }}" rel="stylesheet">
 </head>
  
 <body>
@@ -24,6 +24,9 @@
         </nav>
     </header>
 
+    @foreach($errors->all() as $error)
+        <span>{{ $error }}</span> <br>
+    @endforeach
     <h1 class="titulo">Crear usuario</h1>
     <form method="post" action="{{ route('guardarUsuario')}}" class="formularioRegistro" enctype="multipart/form-data">
     @csrf

@@ -83,15 +83,17 @@
                         @endauth
                     </div>
                 @endforeach
-
             </div>
         @endif
     </div>
-
+ 
     @auth
         @if (Auth::id() === $usuario->id)
             <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
-            <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+
+            @if (Auth::user()->rol === 'dueño de mascota')
+                <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+            @endif
 
             <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
                 @csrf
@@ -102,6 +104,7 @@
             </form>
         @endif
     @endauth
+
 
 
     <footer class="pie">

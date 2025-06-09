@@ -7,6 +7,7 @@
     <title>Crear mascota</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
     <link href="{{ asset('css/usuarios/registroUsuarioStyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estiloFormularios.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -88,5 +89,3 @@
 </body>
 
 </html>
-
-
