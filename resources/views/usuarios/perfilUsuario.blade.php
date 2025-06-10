@@ -20,15 +20,15 @@
 
                 @auth
                     <li class="dropdown">
-                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                        <div class="dropdown-trigger">
+                            <a href="#" class="nombreUsuario"><b>{{ Auth::user()->nombre }}</b></a>
+                        </div>
                         <ul class="submenu">
                             <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit"
-                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
-                                        sesión</button>
+                                    <button type="submit">Cerrar sesión</button>
                                 </form>
                             </li>
                         </ul>
@@ -88,12 +88,16 @@
     </div>
 
     @auth
-        @if (Auth::id() === $usuario->id)
-            <button onclick="window.location.href='{{ route('editarUsuario', ['id' => $usuario->id]) }}'" class="botonPerfil">Editar
-                usuario</button>
+    @if (Auth::id() === $usuario->id)
+        <div class="accionesUsuario">
+            <button onclick="window.location.href='{{ route('editarUsuario', ['id' => $usuario->id]) }}'" class="botonPerfil">
+                Editar usuario
+            </button>
 
             @if (Auth::user()->rol === 'dueño')
-                <button onclick="window.location.href='{{ route('crearMascota') }}'" class="botonPerfil">Añadir mascota</button>
+                <button onclick="window.location.href='{{ route('crearMascota') }}'" class="botonPerfil">
+                    Añadir mascota
+                </button>
             @endif
 
             <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
@@ -103,8 +107,10 @@
                     Eliminar usuario
                 </button>
             </form>
-        @endif
-    @endauth
+        </div>
+    @endif
+@endauth
+
 
     <footer class="pie">
         <div class="autora">

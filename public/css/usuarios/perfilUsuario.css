@@ -1,10 +1,4 @@
-    h2 {
-        text-align: center;
-        margin-top: 2rem;
-        color: #333;
-    }
-
-    /* INFORMACIÓN USUARIO */
+/* INFORMACIÓN USUARIO */
     .informacionUsuario {
         display: flex;
         justify-content: center;
