@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio sesión</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/estiloFormularios.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -41,14 +43,14 @@
     </header>
 
     <h1 class="titulo">Inicio sesión</h1>
-<form method="POST" action="{{ route('procesarLogin') }}" class="formularioRegistro">
-    @csrf
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-    <label for="contrasena">Contraseña:</label>
-    <input type="password" id="contrasena" name="contrasena" required>
-    <button type="submit">Iniciar sesión</button>
-</form>
+    <form method="POST" action="{{ route('procesarLogin') }}" class="formularioRegistro">
+        @csrf
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required>
+        <button type="submit">Iniciar sesión</button>
+    </form>
 
 
     <footer class="pie">

@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina principal</title>
-    <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página principal</title>
     <link href="{{ asset('css/usuarios/mostrarUsuarios.css') }}" rel="stylesheet">
     <link href="{{ asset('css/mascotas/mostrarMascotasPerfil.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
@@ -18,22 +19,21 @@
                 <li><a href="{{ route('handspaws') }}">
                         <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
                     </a></li>
-
                 @auth
                     <li class="dropdown">
-                        <div class="dropdown-toggle"><a href="#"><b>{{ Auth::user()->nombre }}</b></a></div>
+                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
                         <ul class="submenu">
                             <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
-                                    <button type="submit">Cerrar sesión</button>
+                                    <button type="submit"
+                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
+                                        sesión</button>
                                 </form>
                             </li>
                         </ul>
                     </li>
-
-
                 @else
                     <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
                     <li style="color: white;">|</li>
@@ -47,80 +47,97 @@
         <img src="{{ asset('img/panoramica.jpg') }}" alt="imagen cabecera">
     </div>
 
-    <main>
-        <section class="introduccion">
-            <div class="bienvenida">
-                <h1 style="color: orange;">¡Bienvenido!🐾</h1>
-                <p><b>HandsPaws</b> es una página en la que podrás encontrar a los mejores cuidadores para
-                    tus amigos peludos, <br>
-                    Además ofrecemos <b>recomendaciones</b> para el cuidado de vuestras
-                    mascotas como por ejemplo de alimentos que pueden o no
-                    comer, que champú usar según <br>
-                    su pelaje o qué juguetes les pueden gustar. <br>
-                    Entra investiga y participa en el blog contándonos tus
-                    <b>experiencias</b> con los consejos usados o con consejos que
-                    puedan ayudar a más gente.
-                </p>
+    <main class="container my-5">
+        <section class="mb-5">
+            <div class="p-4 bg-white shadow rounded text-center">
+                <h1 class="text-warning">¡Bienvenido! 🐾</h1>
+                <p><b>HandsPaws</b> es una página para encontrar cuidadores y recomendaciones para el cuidado de tus
+                    mascotas.</p>
             </div>
         </section>
 
         <section class="usuarios">
-            <h1 class="titulo">Cuidadores</h1>
+            <h1 class="titulo text-center mt-4">Cuidadores</h1>
 
-            <form action="{{ route('handspaws') }}" method="GET">
+            <form action="{{ route('handspaws') }}" method="GET" class="mx-auto">
                 <label for="direccion">Ciudad</label>
                 <input type="text" name="direccion" placeholder="Buscar por ciudad" value="{{ request('direccion') }}">
                 <input type="submit" value="Filtrar">
             </form>
 
-            <div class="mostrarUsuario">
-                @foreach($usuarios as $usuario)
-                    <div class="lista-usuario">
-                        <div class="card-usuario">
-                            <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
-                                alt="Foto de {{ $usuario->nombUsuario }}">
-                            <u>
-                                <li><a href="{{route('perfilUsuario', $usuario->id)}}">{{$usuario->nombre}}</a></li>
-                                <li>{{$usuario->direccion}}</li>
-                                </ul>
+            <div id="carouselUsuarios" class="carousel slide mt-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach($usuarios->chunk(3) as $chunk)
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <div class="lista-usuario">
+                                @foreach($chunk as $usuario)
+                                    <div class="card-usuario">
+                                        <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
+                                            alt="Foto de {{ $usuario->nombre }}">
+                                        <ul>
+                                            <li><a
+                                                    href="{{ route('perfilUsuario', $usuario->id) }}"><strong>{{ $usuario->nombre }}</strong></a>
+                                            </li>
+                                            <li>{{ $usuario->direccion }}</li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselUsuarios"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselUsuarios"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-
         </section>
 
-        <h3 class="mt-5">Mascotas</h3>
-        <form action="{{ route('handspaws') }}" method="GET">
-            <div class="mascotasUsuario">
-                @foreach($mascotas->chunk(3) as $chunk)
-                    <div class="carousel-item @if($loop->first) active @endif">
-                        <div class="lista-mascotas">
-                            @foreach($chunk as $mascota)
-                                <div class="card-mascota">
-                                    <img src="{{ asset('storage/' . $mascota->fotoMascota) }}"
-                                        alt="Foto de {{ $mascota->nombreMascota }}" class="foto-mascota">
-                                    <ul>
-                                        <li><strong>Nombre:</strong> {{ $mascota->nombreMascota }}</li>
-                                        <li><strong>Especie:</strong> {{ $mascota->especie }}</li>
-                                        <li><strong>Tamaño:</strong> {{ $mascota->tamanio }}</li>
-                                    </ul>
-                                </div>
-                            @endforeach
+
+        <section class="mascotas mb-5">
+            <h3 class="text-center mb-4">Mascotas</h3>
+
+            <div id="mascotasCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @foreach($mascotas->chunk(3) as $chunk)
+                        <div class="carousel-item @if($loop->first) active @endif">
+                            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                                @foreach($chunk as $mascota)
+                                    <div class="card-mascota">
+                                        <img src="{{ asset('storage/' . $mascota->fotoMascota) }}"
+                                            alt="Foto de {{ $mascota->nombreMascota }}" class="foto-mascota">
+                                        <ul class="list-unstyled mt-3">
+                                            <li><strong>Nombre:</strong> {{ $mascota->nombreMascota }}</li>
+                                            <li><strong>Especie:</strong> {{ $mascota->especie }}</li>
+                                            <li><strong>Tamaño:</strong> {{ $mascota->tamanio }}</li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#mascotasCarousel"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#mascotasCarousel"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#mascotasCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#mascotasCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
-            </div>
+        </section>
     </main>
+
     <footer class="pie">
         <div class="autora">
             <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"

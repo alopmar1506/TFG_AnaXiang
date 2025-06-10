@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu perfil</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/mascotas/mostrarMascotasPerfil.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/usuarios/perfilUsuario.css') }}" rel="stylesheet">
 
 </head>
 
@@ -86,26 +86,25 @@
             </div>
         @endif
     </div>
- 
+
     @auth
         @if (Auth::id() === $usuario->id)
-            <a href="{{ route('editarUsuario', $usuario->id) }}">Editar usuario</a>
+            <button onclick="window.location.href='{{ route('editarUsuario', ['id' => $usuario->id]) }}'" class="botonPerfil">Editar
+                usuario</button>
 
-            @if (Auth::user()->rol === 'dueño de mascota')
-                <a href="{{ route('crearMascota') }}">Añadir mascota</a>
+            @if (Auth::user()->rol === 'dueño')
+                <button onclick="window.location.href='{{ route('crearMascota') }}'" class="botonPerfil">Añadir mascota</button>
             @endif
 
             <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')">
+                <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')" class="botonPerfil">
                     Eliminar usuario
                 </button>
             </form>
         @endif
     @endauth
-
-
 
     <footer class="pie">
         <div class="autora">

@@ -1,0 +1,109 @@
+    h2 {
+        text-align: center;
+        margin-top: 2rem;
+        color: #333;
+    }
+
+    /* INFORMACIÓN USUARIO */
+    .informacionUsuario {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .informacionUsuario ul {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        width: 90%;
+        max-width: 500px;
+        list-style: none;
+        text-align: center;
+    }
+
+    .informacionUsuario img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        background-color: #ddd;
+    }
+
+    .informacionUsuario li {
+        margin: 0.5rem 0;
+        font-size: 1rem;
+    }
+
+    /* MASCOTAS */
+    .mascotasUsuario {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        padding: 1rem 2rem 2rem;
+    }
+
+    .card-mascota {
+        background-color: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        padding: 1.5rem;
+        margin: 1rem;
+        width: 260px;
+        text-align: center;
+        transition: transform 0.2s ease;
+    }
+
+    .card-mascota:hover {
+        transform: scale(1.03);
+    }
+
+    .foto-mascota {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        border-radius: 8px;
+        background-color: #eee;
+        margin-bottom: 1rem;
+    }
+
+    .card-mascota ul {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+    .card-mascota li {
+        margin: 0.5rem 0;
+    }
+
+    .card-mascota button {
+        margin-top: 1rem;
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 0.6rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .card-mascota button:hover {
+        background-color: #c0392b;
+    }
+
+    .botonPerfil {
+        background-color: rgb(255, 178, 90);
+        border: none;
+        padding: 0.7rem;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        color: white;
+    }
+
+    .botonPerfil:hover {
+        background-color: #e69a3a;
+    }

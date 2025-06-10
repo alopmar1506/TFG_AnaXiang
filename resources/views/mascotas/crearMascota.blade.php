@@ -41,7 +41,7 @@
         </nav>
     </header>
 
-    <h1 class="titulo"></h1>
+    <h1 class="titulo">Añadir mascota</h1>
     <form method="post" action="{{ route('guardarMascota')}}" class="formularioRegistro" enctype="multipart/form-data">
         @csrf
         <label for="nombreMascota">Nombre de la mascota:</label>

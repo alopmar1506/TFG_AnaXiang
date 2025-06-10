@@ -47,8 +47,9 @@
     @foreach($errors->all() as $error)
         <span>{{ $error }}</span> <br>
     @endforeach
-    <h1>Editar usuario {{$usuario->nombre}}</h1>
-    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}" enctype="multipart/form-data" class="formularioRegistro">
+    <h2>Editar usuario {{$usuario->nombre}}</h2>
+    <form method="post" action="{{ route('actualizarUsuario', $usuario->id)}}" enctype="multipart/form-data"
+        class="formularioRegistro">
         @csrf
         @method('PUT')
         <input type="text" name="nombre" id="nombre" placeholder="Introduce el nombre"
@@ -75,7 +76,7 @@
     </form>
 
     <a href="{{ route('perfilUsuario', $usuario->id) }}">Volver al perfil</a>
-
+    
     <footer class="pie">
         <div class="autora">
             <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>

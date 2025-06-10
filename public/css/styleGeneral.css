@@ -8,7 +8,7 @@
 body {
     margin: 0;
     background-color: rgb(247, 247, 247);
-    overflow-x: hidden; /* << Añade esto */
+    overflow-x: hidden;
 }
 
 
@@ -68,14 +68,14 @@ body {
     right: 0;
     background-color: white;
     min-width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     z-index: 1000;
     padding: 0;
     margin: 0;
 }
 
-.dropdown .dropdown-toggle:hover + .submenu {
+.dropdown .dropdown-toggle:hover+.submenu {
     display: flex;
 }
 
@@ -176,149 +176,241 @@ body {
 
 /*------------------------------------------------*/
 /*INDEX.HTML*/
-.introduccion {
-    display: flex;
-    align-items: stretch;
-}
-
-.bienvenida,
-.formularioRegistro {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-}
-
-.formularioRegistro {
-    justify-content: center;
-}
-
-.formularioRegistro button {
-    background-color: white;
-    color: rgb(255, 119, 8);
-    border: 1px solid rgb(255, 119, 8);
-    cursor: pointer;
-    border-radius: 10px;
-    padding: 0.5rem;
-}
-
-.formularioRegistro button:hover {
-    background-color: rgb(252, 227, 181);
-}
-
-.bienvenida {
-    width: 100%;
-}
-
-div[class="fotoPrincipal"] img {
-    width: 100%;
-    height: 80%;
-}
-
-
-
-/*********************************************/
-/*PERFIL USUARIO*/
-    h2 {
-      text-align: center;
-      margin-top: 2rem;
-      color: #333;
+.fotoPrincipal img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
     }
 
-    /* INFORMACIÓN USUARIO */
-    .informacionUsuario {
-      display: flex;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .informacionUsuario ul {
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    .bienvenida {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
       padding: 2rem;
-      width: 90%;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       max-width: 500px;
-      list-style: none;
+      margin: 2rem auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    form input[type="text"],
+    form input[type="submit"] {
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    form input[type="submit"] {
+      background-color: rgb(255, 178, 90);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+    }
+
+    form input[type="submit"]:hover {
+      background-color: #e69a3a;
+    }
+
+    /*CARRUSEL*/
+
+    .carousel-inner {
+      padding: 2rem 0;
+    }
+
+    .card {
+      margin: auto;
+      width: 250px;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      border-radius: 10px 10px 0 0;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card-body {
       text-align: center;
     }
 
-
-
-    .informacionUsuario li {
-      margin: 0.5rem 0;
-      font-size: 1rem;
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      background-color: rgba(255, 178, 90, 0.8);
+      border-radius: 50%;
     }
 
-    /* MASCOTAS */
-    .mascotasUsuario {
+    .lista-usuario,
+    .lista-mascotas {
       display: flex;
       justify-content: center;
+      gap: 1.5rem;
       flex-wrap: wrap;
-      padding: 1rem 2rem 2rem;
     }
 
+    .card-usuario,
     .card-mascota {
       background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-      padding: 1.5rem;
-      margin: 1rem;
-      width: 260px;
+      width: 250px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       text-align: center;
-      transition: transform 0.2s ease;
+      padding: 1rem;
     }
 
+    .card-usuario:hover,
     .card-mascota:hover {
-      transform: scale(1.03);
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
 
+    .foto-usuario,
+    .foto-mascota {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      background-color: #f0f0f0;
+    }
+
+    .card-usuario p,
+    .card-mascota ul {
+      margin-top: 1rem;
+      font-size: 0.95rem;
+    }
 
     .card-mascota ul {
       list-style: none;
       padding: 0;
-      text-align: left;
     }
 
-    .card-mascota li {
-      margin: 0.5rem 0;
+    .card-mascota ul li {
+      margin: 0.3rem 0;
     }
 
-    .card-mascota button {
-      margin-top: 1rem;
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 0.6rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
 
-    .card-mascota button:hover {
-      background-color: #c0392b;
-    }
+/*********************************************/
+/*PERFIL USUARIO*/
 
-    .informacionUsuario img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #ddd;
-  margin-bottom: 1rem;
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
+h1 {
+    text-align: center;
+    margin-top: 2rem;
+    color: black;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 2rem;
+    color: black;
+}
+
+/* INFORMACIÓN USUARIO */
+.informacionUsuario {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.informacionUsuario ul {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    list-style: none;
+    text-align: center;
+}
+
+
+
+.informacionUsuario li {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+/* MASCOTAS */
+.mascotasUsuario {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem 2rem 2rem;
+}
+
+.card-mascota {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin: 1rem;
+    width: 260px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.card-mascota:hover {
+    transform: scale(1.03);
+}
+
+
+.card-mascota ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.card-mascota li {
+    margin: 0.5rem 0;
+}
+
+.card-mascota button {
+    margin-top: 1rem;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card-mascota button:hover {
+    background-color: #c0392b;
+}
+
+.informacionUsuario img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ddd;
+    margin-bottom: 1rem;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .foto-mascota {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  background-color: #eee;
-  margin-bottom: 1rem;
-  display: block;
-  max-width: 100%;
-  max-height: 100%;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+    background-color: #eee;
+    margin-bottom: 1rem;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
 }
