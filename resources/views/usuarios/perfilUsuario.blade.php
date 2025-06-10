@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tu perfil</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/usuarios/perfilUsuario.css') }}" rel="stylesheet">
-
 </head>
 
 <body>
@@ -110,7 +108,6 @@
         </div>
     @endif
 @endauth
-
 
     <footer class="pie">
         <div class="autora">

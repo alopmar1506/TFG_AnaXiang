@@ -276,6 +276,10 @@ form input[type="submit"]:hover {
     background-color: #e69a3a;
 }
 
+.filtro{
+
+}
+
 /*CARRUSEL*/
 
 .carousel-inner {
@@ -346,7 +350,7 @@ form input[type="submit"]:hover {
     font-size: 0.95rem;
 }
 
-.card-mascota ul {
+.card-mascota, .card-usuario ul {
     list-style: none;
     padding: 0;
 }
@@ -490,8 +494,6 @@ form input[type="submit"]:hover {
     list-style: none;
     text-align: center;
 }
-
-
 
 .informacionUsuario li {
     margin: 0.5rem 0;

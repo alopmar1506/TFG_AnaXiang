@@ -57,7 +57,7 @@
         <section class="usuarios">
             <h1 class="titulo text-center mt-4">Cuidadores</h1>
 
-            <form action="{{ route('handspaws') }}" method="GET" class="mx-auto">
+            <form action="{{ route('handspaws') }}" method="GET" class="mx-auto" class="filtro">
                 <label for="direccion">Ciudad</label>
                 <input type="text" name="direccion" placeholder="Buscar por ciudad" value="{{ request('direccion') }}">
                 <input type="submit" value="Filtrar">
@@ -70,13 +70,11 @@
                             <div class="lista-usuario">
                                 @foreach($chunk as $usuario)
                                     <div class="card-usuario">
-                                        <img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
-                                            alt="Foto de {{ $usuario->nombre }}">
+                                        <a href="{{ route('perfilUsuario', $usuario->id) }}"><img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
+                                            alt="Foto de {{ $usuario->nombre }}"></a>
                                         <ul>
-                                            <li><a
-                                                    href="{{ route('perfilUsuario', $usuario->id) }}"><strong>{{ $usuario->nombre }}</strong></a>
-                                            </li>
-                                            <li>{{ $usuario->direccion }}</li>
+                                            <li><strong>{{ $usuario->nombre }}</strong></li>
+                                            <li><strong>Provincia:</strong> {{ $usuario->direccion }}</li>
                                         </ul>
                                     </div>
                                 @endforeach

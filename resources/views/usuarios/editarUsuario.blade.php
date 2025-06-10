@@ -8,7 +8,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Formulario editar usuario</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/estiloFormularios.css') }}" rel="stylesheet">
 </head>
 
 <body>
