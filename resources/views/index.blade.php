@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Página principal</title>
+    <title>HandsPaws</title>
     <link href="{{ asset('css/styleGeneral.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="img/logoHandsPaws.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -19,18 +20,21 @@
                     </a></li>
                 @auth
                     <li class="dropdown">
-                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
-                        <ul class="submenu">
-                            <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit"
-                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
-                                        sesión</button>
-                                </form>
-                            </li>
-                        </ul>
+                        <div class="nombre">
+                            <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="sesion">
+                                        @csrf
+                                        <button type="submit"
+                                            style="background:none; border:none; color:blue; cursor:pointer; font-size: 10px;">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 @else
                     <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
@@ -42,7 +46,7 @@
     </header>
 
     <div class="fotoPrincipal">
-        <img src="{{ asset('img/panoramica.jpg') }}" alt="imagen cabecera">
+        <img src="{{ asset('img/panoramica2.jpg') }}" alt="imagen cabecera">
     </div>
 
     <main class="container my-5">
@@ -70,8 +74,9 @@
                             <div class="lista-usuario">
                                 @foreach($chunk as $usuario)
                                     <div class="card-usuario">
-                                        <a href="{{ route('perfilUsuario', $usuario->id) }}"><img src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
-                                            alt="Foto de {{ $usuario->nombre }}"></a>
+                                        <a href="{{ route('perfilUsuario', $usuario->id) }}"><img
+                                                src="{{ asset('storage/' . $usuario->fotoUsuario) }}" class="foto-usuario"
+                                                alt="Foto de {{ $usuario->nombre }}"></a>
                                         <ul>
                                             <li><strong>{{ $usuario->nombre }}</strong></li>
                                             <li><strong>Provincia:</strong> {{ $usuario->direccion }}</li>

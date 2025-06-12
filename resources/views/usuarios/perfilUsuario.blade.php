@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,64 +50,70 @@
         </ul>
     </div>
 
-    <h2>Tus mascotas: </h2>
-    <div class="mascotasUsuario">
-        @if ($mascota->isEmpty())
-            <p>No tienes mascotas registradas.</p>
-        @else
-            <div class="lista-mascotas">
-                @foreach ($mascota as $mascotas)
-                    <div class="card-mascota">
-                        <img src="{{ asset('storage/' . $mascotas->fotoMascota) }}" alt="Foto de {{ $mascotas->nombreMascota }}"
-                            class="foto-mascota">
-                        <ul>
-                            <li><strong>Nombre:</strong> {{ $mascotas->nombreMascota }}</li>
-                            <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
-                            <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
-                        </ul>
+    @if (Auth::user()->rol === 'dueño')
+        <h2>Tus mascotas: </h2>
+        <div class="mascotasUsuario">
+            @if ($mascota->isEmpty())
+                <p>No tienes mascotas registradas.</p>
+            @else
+                <div class="lista-mascotas">
+                    @foreach ($mascota as $mascotas)
+                        <div class="card-mascota">
+                            <img src="{{ asset('storage/' . $mascotas->fotoMascota) }}" alt="Foto de {{ $mascotas->nombreMascota }}"
+                                class="foto-mascota">
+                            <ul>
+                                <li><strong>Nombre:</strong> {{ $mascotas->nombreMascota }}</li>
+                                <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
+                                <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
+                            </ul>
 
-                        @auth
-                            @if (Auth::id() === $usuario->id)
-                                <form action="{{ route('eliminarMascota', $mascotas->id) }}" method="POST" style="margin-top: 10px;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta mascota?')"
-                                        class="btn-eliminar">
-                                        Eliminar mascota
-                                    </button>
-                                </form>
-                            @endif
-                        @endauth
-                    </div>
-                @endforeach
-            </div>
-        @endif
-    </div>
-
-    @auth
-    @if (Auth::id() === $usuario->id)
-        <div class="accionesUsuario">
-            <button onclick="window.location.href='{{ route('editarUsuario', ['id' => $usuario->id]) }}'" class="botonPerfil">
-                Editar usuario
-            </button>
-
-            @if (Auth::user()->rol === 'dueño')
-                <button onclick="window.location.href='{{ route('crearMascota') }}'" class="botonPerfil">
-                    Añadir mascota
-                </button>
+                            @auth
+                                @if (Auth::id() === $usuario->id)
+                                    <form action="{{ route('eliminarMascota', $mascotas->id) }}" method="POST" style="margin-top: 10px;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta mascota?')"
+                                            class="btn-eliminar">
+                                            Eliminar mascota
+                                        </button>
+                                    </form>
+                                @endif
+                            @endauth
+                        </div>
+                    @endforeach
+                </div>
             @endif
-
-            <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
-                @csrf
-                @method('DELETE')
-                <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')" class="botonPerfil">
-                    Eliminar usuario
-                </button>
-            </form>
         </div>
     @endif
-@endauth
 
+
+
+
+    @auth
+        @if (Auth::id() === $usuario->id)
+            <div class="accionesUsuario">
+                <button onclick="window.location.href='{{ route('editarUsuario', ['id' => $usuario->id]) }}'"
+                    class="botonPerfil">
+                    Editar usuario
+                </button>
+
+                @if (Auth::user()->rol === 'dueño')
+                    <button onclick="window.location.href='{{ route('crearMascota') }}'" class="botonPerfil">
+                        Añadir mascota
+                    </button>
+                @endif
+
+                <form action="{{ route('eliminarUsuario', $usuario->id) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este usuario?')"
+                        class="botonPerfil">
+                        Eliminar usuario
+                    </button>
+                </form>
+            </div>
+        @endif
+    @endauth
     <footer class="pie">
         <div class="autora">
             <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"

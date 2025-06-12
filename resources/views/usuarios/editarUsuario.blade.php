@@ -63,8 +63,7 @@
         <input type="text" name="email" id="email" placeholder="Introduce el email"
             value="{{old('email', $usuario->email)}}">
         <br>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Introduce la contraseña"
-            value="{{old('contrasena', $usuario->contrasena)}}">
+        <input type="password" name="contrasena" id="contrasena" placeholder="Introduce la contraseña">
         <br>
         <input type="file" name="fotoUsuario" id="fotoUsuario" value="{{old('fotoUsuario', $usuario->fotoUsuario)}}">
         <br>

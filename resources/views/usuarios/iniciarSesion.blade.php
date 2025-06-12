@@ -51,7 +51,6 @@
         <button type="submit">Iniciar sesión</button>
     </form>
 
-
     <footer class="pie">
         <div class="autora">
             <a href="index.html"><img src="img/logoHandsPaws-removebg-preview.png" alt="logoHandsPaws"></a>

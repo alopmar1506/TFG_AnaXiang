@@ -67,30 +67,43 @@ h1 {
     color: white;
 }
 
-
-.dropdown {
-    position: relative;
-}
-
-.submenu {
+.dropdown .submenu {
     display: none;
-    flex-direction: column;
     position: absolute;
     top: 100%;
     right: 0;
     background-color: white;
-    min-width: 160px;
+    min-width: 120px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 6px;
     z-index: 1000;
-    padding: 0;
+    flex-direction: column;
+    padding: 0.3rem 0;
     margin: 0;
+    font-size: 0.85rem;
 }
 
-.dropdown .dropdown-toggle:hover+.submenu {
+.dropdown .submenu li a{
+    color: black;
+}
+
+.dropdown .nombre:hover .submenu {
     display: flex;
 }
 
+form.sesion {
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+form.sesion button {
+    font-size: 20px;
+    padding: 2px 5px;
+}
+
+.nombre a{
+    margin-left: 2rem;
+}
 
 /*------------------------------------------------*/
 /*FOOTER*/
@@ -276,10 +289,6 @@ form input[type="submit"]:hover {
     background-color: #e69a3a;
 }
 
-.filtro{
-
-}
-
 /*CARRUSEL*/
 
 .carousel-inner {
@@ -350,7 +359,8 @@ form input[type="submit"]:hover {
     font-size: 0.95rem;
 }
 
-.card-mascota, .card-usuario ul {
+.card-mascota,
+.card-usuario ul {
     list-style: none;
     padding: 0;
 }
