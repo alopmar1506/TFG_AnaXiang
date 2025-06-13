@@ -17,18 +17,21 @@
                     </a></li>
                 @auth
                     <li class="dropdown">
-                        <div class="dropdown-trigger">
-                            <a href="#" class="nombreUsuario"><b>{{ Auth::user()->nombre }}</b></a>
+                        <div class="nombre">
+                            <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="sesion">
+                                        @csrf
+                                        <button type="submit"
+                                            style="background:none; border:none; color:blue; cursor:pointer; font-size: 10px;">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="submenu">
-                            <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit">Cerrar sesión</button>
-                                </form>
-                            </li>
-                        </ul>
                     </li>
                 @else
                     <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
@@ -56,38 +59,35 @@
             @if ($mascota->isEmpty())
                 <p>No tienes mascotas registradas.</p>
             @else
-                <div class="lista-mascotas">
-                    @foreach ($mascota as $mascotas)
-                        <div class="card-mascota">
-                            <img src="{{ asset('storage/' . $mascotas->fotoMascota) }}" alt="Foto de {{ $mascotas->nombreMascota }}"
-                                class="foto-mascota">
-                            <ul>
-                                <li><strong>Nombre:</strong> {{ $mascotas->nombreMascota }}</li>
-                                <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
-                                <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
-                            </ul>
+                    <div class="lista-mascotas">
+                        @foreach ($mascota as $mascotas)
+                            <div class="card-mascota">
+                                <img src="{{ asset('storage/' . $mascotas->fotoMascota) }}" alt="Foto de {{ $mascotas->nombreMascota }}"
+                                    class="foto-mascota">
+                                <ul>
+                                    <li><strong>Nombre:</strong> {{ $mascotas->nombreMascota }}</li>
+                                    <li><strong>Especie:</strong> {{ $mascotas->especie }}</li>
+                                    <li><strong>Tamaño:</strong> {{ $mascotas->tamanio }}</li>
+                                </ul>
 
-                            @auth
-                                @if (Auth::id() === $usuario->id)
-                                    <form action="{{ route('eliminarMascota', $mascotas->id) }}" method="POST" style="margin-top: 10px;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta mascota?')"
-                                            class="btn-eliminar">
-                                            Eliminar mascota
-                                        </button>
-                                    </form>
-                                @endif
-                            @endauth
-                        </div>
-                    @endforeach
+                                @auth
+                                    @if (Auth::id() === $usuario->id)
+                                        <form action="{{ route('eliminarMascota', $mascotas->id) }}" method="POST" style="margin-top: 10px;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('¿Estás seguro de eliminar esta mascota?')"
+                                                class="btn-eliminar">
+                                                Eliminar mascota
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             @endif
-        </div>
     @endif
-
-
-
 
     @auth
         @if (Auth::id() === $usuario->id)
@@ -114,6 +114,8 @@
             </div>
         @endif
     @endauth
+    </div>
+
     <footer class="pie">
         <div class="autora">
             <a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"

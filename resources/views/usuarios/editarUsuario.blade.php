@@ -11,28 +11,29 @@
 </head>
 
 <body>
-
     <header class="cabecera">
         <nav>
             <ul>
                 <li><a href="{{ route('handspaws') }}">
                         <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
                     </a></li>
-
                 @auth
                     <li class="dropdown">
-                        <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
-                        <ul class="submenu">
-                            <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit"
-                                        style="background:none; border:none; color:blue; cursor:pointer;">Cerrar
-                                        sesión</button>
-                                </form>
-                            </li>
-                        </ul>
+                        <div class="nombre">
+                            <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="sesion">
+                                        @csrf
+                                        <button type="submit"
+                                            style="background:none; border:none; color:blue; cursor:pointer; font-size: 10px;">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
                     </li>
                 @else
                     <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
@@ -63,7 +64,8 @@
         <input type="text" name="email" id="email" placeholder="Introduce el email"
             value="{{old('email', $usuario->email)}}">
         <br>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Introduce la contraseña">
+        <input type="password" name="contrasena" id="contrasena" placeholder="Introduce la contraseña"
+        value="{{old('contrasena', $usuario->contrasena)}}">
         <br>
         <input type="file" name="fotoUsuario" id="fotoUsuario" value="{{old('fotoUsuario', $usuario->fotoUsuario)}}">
         <br>

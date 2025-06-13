@@ -12,13 +12,32 @@
     <header class="cabecera">
         <nav>
             <ul>
-                <li><a href="{{ route('handspaws') }}"><img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}"
-                            alt="logoHandsPaws"></a>
-                </li>
-                <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
-                <li style="color: white;">|</li>
-                <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a>
-                </li>
+                <li><a href="{{ route('handspaws') }}">
+                        <img src="{{ asset('img/logoHandsPaws-removebg-preview.png') }}" alt="logoHandsPaws">
+                    </a></li>
+                @auth
+                    <li class="dropdown">
+                        <div class="nombre">
+                            <a href="#"><b>{{ Auth::user()->nombre }}</b></a>
+                            <ul class="submenu">
+                                <li><a href="{{ route('perfilUsuario', Auth::user()->id) }}">Mi perfil</a></li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="sesion">
+                                        @csrf
+                                        <button type="submit"
+                                            style="background:none; border:none; color:blue; cursor:pointer; font-size: 10px;">
+                                            Cerrar sesión
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                @else
+                    <li><a href="{{ route('iniciarSesion') }}"><b>Iniciar sesión</b></a></li>
+                    <li style="color: white;">|</li>
+                    <li><a href="{{ route('crearUsuario') }}"><b>Registrarse</b></a></li>
+                @endauth
             </ul>
         </nav>
     </header>
